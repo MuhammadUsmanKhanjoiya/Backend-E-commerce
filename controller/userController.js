@@ -54,11 +54,16 @@ const adminlogin = async (req, res) => {
         const token = jwt.sign(email+password,process.env.jwt_secret)
         res.json({ success: true, token });
     }    else{
-      res.json({ success: false, message:"Invaild Credentials" });
+      resres
+      .status(401).json({ success: false, message:"Invaild Credentials" });
     }
 
    } catch (error) {
-    
+res
+      .status(500)
+      .json({ message: "some thing went wrong", error: error.message });
+  
+     
    }
   
 };
