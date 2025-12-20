@@ -11,11 +11,11 @@ const login = async (req, res) => {
   try {
     const existingUser = await UserModel.findOne({ email });
     if (!existingUser) {
-      res.status(400).json({ message: "user not found" });
+      res.status(404).json({ message: "user not found" });
     }
     const matchPassword = await bcrypt.compare(password, existingUser.password);
     if (!matchPassword) {
-      res.status(400).json({ message: "invailed password" });
+      res.status(401).json({ message: "invailed password" });
     }
     const token = createToken(existingUser._id);
     res
