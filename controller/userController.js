@@ -49,10 +49,6 @@ const adminlogin = async (req, res) => {
    try {
     const {email , password}= req.body
     
-     const existingUser = await UserModel.findOne({ email });
-    if (!existingUser) {
-      res.status(400).json({ message: "user not found" });
-    }
      
      if(email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD){
         const token = jwt.sign(email+password,process.env.jwt_secret)
